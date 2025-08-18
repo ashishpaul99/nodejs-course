@@ -173,34 +173,63 @@
 // ->we dont need call back in this code because we are using await and catch error using catch block.
 
 // importing file system promises
-const fsPromises=require('fs').promises;
-const path=require('path');
+// eg-1: 
+// -> We don't need a callback in this code because we are using await and catching errors with try...catch.
 
-// file operations
-const fileOps=async ()=>{
-    try{
-        const data=await fsPromises.readFile(path.join(__dirname,"files","starter.txt"),"utf8");
-        console.log(data);
+// importing file system promises
+// const fsPromises = require("fs").promises;
+// const path = require("path");
 
-        // creating file
-        await fsPromises.writeFile(path.join(__dirname,"files","promiseWrite.txt"),data);
-        console.log("Write completed")
+// // file operations
+// const fileOps = async () => {
+//   try {
+//     // read file
+//     const data = await fsPromises.readFile(
+//       path.join(__dirname, "files", "starter.txt"),
+//       "utf8"
+//     );
+//     console.log(data);
 
-        // appending new content
-        await fsPromises.appendFile(path.join(__dirname,"files","promiseWrite.txt"),"\n\nhey I am writing something new");
-        console.log("Append completed");
+//     // creating file
+//     await fsPromises.writeFile(
+//       path.join(__dirname, "files", "promiseWrite.txt"),
+//       data
+//     );
+//     console.log("Write completed");
 
-        // rename file
-        await fsPromises.rename(path.join(__dirname,"files","promiseWrite.txt"),path.join(__dirname,"files","promiseComplete.txt"))
-        console.log("rename complete");
+//     // appending new content
+//     await fsPromises.appendFile(
+//       path.join(__dirname, "files", "promiseWrite.txt"),
+//       "\n\nhey I am writing something new"
+//     );
+//     console.log("Append completed");
 
-        const newData=await fsPromises.readFile(path.join(__dirname,"files","promiseComplete.txt"),"utf8")
-        console.log(newData);
+//     // rename file
+//     await fsPromises.rename(
+//       path.join(__dirname, "files", "promiseWrite.txt"),
+//       path.join(__dirname, "files", "promiseComplete.txt")
+//     );
+//     console.log("Rename complete");
 
-    }catch(err){
-        console.error(err);
-    }
-}
+//     // read renamed file
+//     const newData = await fsPromises.readFile(
+//       path.join(__dirname, "files", "promiseComplete.txt"),
+//       "utf8"
+//     );
+//     console.log(newData);
 
-fileOps();
+//     // delete file safely (if it exists)
+//     const fileToDelete = path.join(__dirname, "files", "test.txt");
+//     try {
+//       await fsPromises.unlink(fileToDelete);
+//       console.log("Unlinking completed");
+//     } catch {
+//       console.log("File 'test.txt' not found, skipping delete.");
+//     }
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// fileOps();
 
