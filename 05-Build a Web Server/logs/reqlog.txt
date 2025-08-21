@@ -1,0 +1,17 @@
+Date: 2025-08-21 22:21:36	ID: 4a861068-cca8-4609-89c1-39e39be791df	Message: /new-page.html	GET
+Date: 2025-08-21 22:21:36	ID: a7967c6c-c370-4b13-a7dc-14ad994c383e	Message: /css/style.css	GET
+Date: 2025-08-21 22:21:36	ID: 4e9daef8-8e72-4a20-954c-5d159ad49cdd	Message: /img/img1.jpg	GET
+Date: 2025-08-21 22:21:36	ID: 8268f652-1a2c-42b3-9536-bb04955cb8be	Message: /favicon.ico	GET
+Date: 2025-08-21 22:23:06	ID: 160ff664-9a8f-4644-91c4-d217f4709c76	Message: /old	GET
+Date: 2025-08-21 22:23:06	ID: c974fc97-8f80-45c4-bdc4-3d55caa7d551	Message: /css/style.css	GET
+Date: 2025-08-21 22:23:22	ID: 8517997c-8d26-4d14-928f-b5d572b0187c	Message: /odasfdsaf	GET
+Date: 2025-08-21 22:23:22	ID: 028400ae-30f6-4ea7-8665-e1458520039e	Message: /css/style.css	GET
+Date: 2025-08-21 22:23:32	ID: 2687e9cb-ab3a-478f-8d16-fb0c2aa10fc8	Message: /odasfdsaf	GET
+Date: 2025-08-21 22:23:32	ID: 922dd9a9-bbe8-43f4-a2a9-7590f947c474	Message: /css/style.css	GET
+Date: 2025-08-21 22:24:38	ID: bc93106d-a22f-4b24-a14b-f0534c9d1e3d	Message: /odasfdsaf	GET
+Date: 2025-08-21 22:24:59	ID: 0095ec50-1bab-47ad-b164-d524fc2ec48d	Message: /odasfdsaf	GET
+Date: 2025-08-21 22:24:59	ID: 0532475e-efff-4ad4-8a19-70ab9dc8f23a	Message: /css/style.css	GET
+Date: 2025-08-21 22:31:52	ID: 80c1630a-b2a9-4989-ad04-c34706a6eba5	Message: /	GET
+Date: 2025-08-21 22:31:52	ID: ab819acd-4d5c-49d7-a5ca-e7d8fc777c44	Message: /css/style.css	GET
+Date: 2025-08-21 22:31:56	ID: 96175500-92ed-4cf1-bdca-3a4f4481b9a8	Message: /asgfas	GET
+Date: 2025-08-21 22:31:56	ID: 8bcb769c-be7f-46ad-be8e-7c9805051c7a	Message: /css/style.css	GET
