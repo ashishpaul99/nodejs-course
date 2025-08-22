@@ -119,127 +119,131 @@ const logEvents = require("./logEvents");
 const EventEmitter = require('events');
 class Emitter extends EventEmitter {}
 
-// ✅ Initialize custom EventEmitter
+// Intializing Object
 const myEmitter = new Emitter();
 
-// ✅ Listen for "log" events and call logEvents
-myEmitter.on('log', (msg, fileName) => logEvents(msg, fileName));
-
-// ✅ Define server port
+// definig the port for the web server.
+// say what port it will be on.
 const PORT = process.env.PORT || 3500;
 
-/**
- * Serve a file to the client
- * @param {string} filePath - Path of the requested file
- * @param {string} contentType - MIME type of the file
- * @param {http.ServerResponse} response - Server response object
- */
-const serveFile = async (filePath, contentType, response) => {
-  try {
-    // ✅ Read the file
-    const rawData = await fsPromises.readFile(
-      filePath,
-      contentType.includes('image') ? null : 'utf8'
-    );
+// An async function to serve a file to the client
+const serverFile = async (filePath, contentType, response) => {
+    try {
+        // ✅ Read the requested file asynchronously
+        // Use 'utf8' encoding for text-based files (HTML, CSS, JS, JSON, etc.).
+        // For images or other binary files, omit encoding so the raw buffer is returned.
+        const rawData = await fsPromises.readFile(
+            filePath,
+            contentType.includes('image') ? null : 'utf8' // null → gives Buffer, 'utf8' → gives String
+        );
 
-    // ✅ Parse JSON files, else return raw content
-    const data = contentType === 'application/json' ? JSON.parse(rawData) : rawData;
+        // If JSON, parse the raw data into JS object, otherwise keep as it is
+        const data = contentType === 'application/json' ? JSON.parse(rawData) : rawData;
 
-    // ✅ Send response header
-    response.writeHead(
-      filePath.includes('404.html') ? 404 : 200,
-      { 'Content-Type': contentType }
-    );
+        // ✅ Send a successful response header with correct content type
+        response.writeHead(200, { 'Content-Type': contentType });
 
-    // ✅ Send response body
-    response.end(contentType === 'application/json' ? JSON.stringify(data) : data);
+        // ✅ Send the file data as the response body
+        response.end(
+            contentType === 'application/json' ? JSON.stringify(data) : data
+        );
 
-  } catch (err) {
-    console.error(err);
-    myEmitter.emit('log', `${err.name}\t${err.message}`, 'errlog.txt');
+    } catch (err) {
+        // ❌ If any error occurs (e.g., file not found, permission issues), log it
+        console.log(err);
 
-    // ❌ Internal server error
-    response.statusCode = 500;
-    response.end();
-  }
+        // ✅ Set HTTP status code 500 (Internal Server Error)
+        response.statusCode = 500;
+
+        // ✅ End the response without sending data
+        response.end();
+    }
 };
 
-// ✅ Create HTTP server
+// creating minimal server
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  myEmitter.emit('log', `${req.url}\t${req.method}`, 'reqlog.txt');
+    console.log(req.url, req.method);
 
-  // ✅ Get file extension
-  const extension = path.extname(req.url);
+    // extension of request url
+    const extension = path.extname(req.url);
 
-  // ✅ Determine content type
-  let contentType;
-  switch (extension) {
-    case '.css':
-      contentType = 'text/css';
-      break;
-    case '.js':
-      contentType = 'text/javascript';
-      break;
-    case '.json':
-      contentType = 'application/json';
-      break;
-    case '.jpg':
-    case '.jpeg':
-      contentType = 'image/jpeg';
-      break;
-    case '.png':
-      contentType = 'image/png';
-      break;
-    case '.txt':
-      contentType = 'text/plain';
-      break;
-    default:
-      contentType = 'text/html';
-  }
-
-  // ✅ Build file path
-  let filePath =
-    contentType === 'text/html' && req.url === "/"
-      ? path.join(__dirname, 'views', 'index.html')
-      : contentType === 'text/html' && req.url.slice(-1) === '/'
-        ? path.join(__dirname, 'views', req.url, 'index.html')
-        : contentType === 'text/html'
-          ? path.join(__dirname, 'views', req.url)
-          : path.join(__dirname, req.url);
-
-  // ✅ If no extension (like /about), add .html
-  if (!extension && req.url.slice(-1) !== '/') filePath += '.html';
-
-  // ✅ Check if file exists
-  const fileExists = fs.existsSync(filePath);
-
-  if (fileExists) {
-    serveFile(filePath, contentType, res);
-  } else {
-    // ✅ Handle redirects or 404
-    switch (path.parse(filePath).base) {
-      case 'old-page.html':
-        res.writeHead(301, { location: '/new-page.html' });
-        res.end();
-        break;
-      case 'www-page.html':
-        res.writeHead(301, { location: '/' });
-        res.end();
-        break;
-      default:
-        serveFile(path.join(__dirname, 'views', '404.html'), 'text/html', res);
+    // define content type
+    let contentType;
+    switch (extension) {
+        case '.css':
+            contentType = 'text/css';
+            break;
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.json':
+            contentType = 'application/json';
+            break;
+        case '.jpg': // ✅ fixed missing dot
+            contentType = 'image/jpeg';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.txt':
+            contentType = 'text/plain';
+            break;
+        default:
+            contentType = 'text/html';
     }
-  }
+
+    // if req.url === '/' → load index.html
+    // else if req.url ends with '/' → look for an index.html inside that subdirectory
+    // else if contentType is 'text/html' → serve the requested .html file
+    // else → serve the requested file (CSS, JS, image, etc.)
+    let filePath =
+        contentType === 'text/html' && req.url === "/" ? path.join(__dirname, 'views', 'index.html')
+            : contentType === 'text/html' && req.url.slice(-1) === '/' ? path.join(__dirname, 'views', req.url, 'index.html')
+                : contentType === 'text/html' ?
+                    path.join(__dirname, 'views', req.url) : path.join(__dirname, req.url);
+
+    // if there is no extension, it is probably a directory request (ending with '/')
+    // if the request is like /new-page (without typing .html), this logic adds .html
+    // this makes the .html extension not required in the browser
+    // about → becomes about.html
+    // contact → becomes contact.html
+    if (!extension && req.url.slice(-1) !== '/') filePath += '.html';
+
+    // checking file whether it exists or not before serving
+    const fileExists = fs.existsSync(filePath);
+
+    // if file exists then serve the file
+    if (fileExists) {
+        // serve the file
+        serverFile(filePath, contentType, res);
+
+    } else {
+        // 404 or 301 redirect
+        // path.parse() takes a file path string and breaks it into parts (returns an object).
+        // Check the requested file's base name.
+        // If it matches 'old-page.html', send a 301 redirect
+        // and point the browser to '/new-page.html'.
+        // path.parse(filePath).base is checking the actual filename (like "old-page.html").
+        switch (path.parse(filePath).base) {
+            case 'old-page.html':
+                // redirect to new page
+                res.writeHead(301, { location: '/new-page.html' });
+                res.end();
+                break;
+
+            case 'www-page.html':
+                res.writeHead(301, { location: '/' });
+                res.end();
+                break;
+
+            default:
+                // serve a 404 response
+                serverFile(path.join(__dirname, 'views', '404.html'), 'text/html', res);
+        }
+    }
 });
 
-// ✅ Start listening
+// listening to request
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
-
-// Note: Express.js makes this whole setup much simpler.
-// But writing it with Node core modules gives a deep understanding of how a web server works.
-
-
-
