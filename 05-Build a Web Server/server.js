@@ -141,6 +141,7 @@ const serverFile = async (filePath, contentType, response) => {
         const data = contentType === 'application/json' ? JSON.parse(rawData) : rawData;
 
         // ✅ Send a successful response header with correct content type
+        // response.writeHead(statusCode, headers)
         response.writeHead(200, { 'Content-Type': contentType });
 
         // ✅ Send the file data as the response body
@@ -230,7 +231,7 @@ const server = http.createServer((req, res) => {
                 res.writeHead(301, { location: '/new-page.html' });
                 res.end();
                 break;
-
+            // if a client requests /www-page.html, the server responds with a 301 redirect to /.
             case 'www-page.html':
                 res.writeHead(301, { location: '/' });
                 res.end();
