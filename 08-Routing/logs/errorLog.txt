@@ -1,0 +1,8 @@
+Date: 2025-08-25 22:39:59	ID: 98665ce6-369e-476f-9c2c-d0582dbbbee0	Message: Error:Not allowed by CORS
+
+
+
+Date: 2025-08-28 18:15:27	ID: 2b7e859e-5695-4deb-ae93-64e311d1aeaa	Message: SyntaxError:Expected double-quoted property name in JSON at position 38 (line 5 column 1)
+Date: 2025-08-28 18:15:49	ID: fb0c8de9-1ab7-4bca-8800-d7db1711892b	Message: SyntaxError:Expected double-quoted property name in JSON at position 35 (line 4 column 1)
+Date: 2025-08-28 18:16:35	ID: a3715df1-ffdf-45ab-b44d-6863ceffa531	Message: SyntaxError:Bad control character in string literal in JSON at position 32 (line 3 column 21)
+Date: 2025-08-28 18:18:16	ID: 3983fdb4-6715-4d17-81d5-020ef1dcdbb2	Message: SyntaxError:Expected double-quoted property name in JSON at position 15 (line 3 column 1)

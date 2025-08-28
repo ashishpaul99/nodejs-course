@@ -1,6 +1,0 @@
-id:b807d7a3-fefa-4af8-98ee-94569b45435d	DateTime:2025-08-22	14-41-53	/	GET
-id:7e5da43f-fb20-49ed-a636-de7a24e53a35	DateTime:2025-08-22	14-41-53	/css/style.css	GET
-id:cb4dead6-bfe3-4ca3-be14-c057f583a0c2	DateTime:2025-08-22	14-41-53	/favicon.ico	GET
-id:8b3d76d6-02c2-4503-a6ce-50f5e8e69bc3	DateTime:2025-08-22	14-44-16	/css/style.css	GET
-id:c40997ac-ec08-4313-b482-620b98a3d58e	DateTime:2025-08-22	14-44-16	/	GET
-id:86b0398c-02e8-4c0a-81e3-ce0f92391191	DateTime:2025-08-22	14-44-16	/favicon.ico	GET
