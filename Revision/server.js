@@ -2,15 +2,15 @@ const express=require("express");
 const path=require("path");
 const {logEvents, logger}=require("./middleware/logEvents");
 const cors=require("cors");
-const fs=require("fs");
+const errorHandler = require("./middleware/errorHandler");
 const port=3000;
 
 const app=express();
 app.use(logger);
 
 const whiteList=[
-   "http://localhost:3000/",
-   "https://www.google.com/"
+   "http://localhost:3000",
+   "https://www.google.com"
 ];
 
 const corsOptions={
@@ -24,24 +24,20 @@ const corsOptions={
     optionsSuccessStatus:200
 }
 app.use(cors(corsOptions));
+app.use(express.json());  // for parsing application/json
+app.use(express.urlencoded({ extended: false })); // for form data
 
-const filePath=path.join(__dirname,"views")
-app.get(/^\/$|\/index(.html)?/,(req,res)=>{
-  res.sendFile(path.join(filePath,"index.html"));
-})
-app.get("/test-error", (req, res, next) => {
-  try {
-    throw new Error("This is a test error!");
-  } catch (err) {
-    next(err); // pass error to your error middleware
-  }
-});
 
-app.use((err,req,res,next)=>{
-   logEvents(`${err.name}:${err.message}`,'errLog.txt')
-   console.log(err.stack);
-   res.status(503).send(err.message);
+app.use(express.static(path.join(__dirname,"public")))
+app.use('/subdir',require('./routes/subdir'));
+app.use('/',require("./routes/root"));
+app.use('/employees',require('./routes/api/employees'));
+
+
+app.use((req,res)=>{
+  res.status(404).sendFile(path.join(__dirname,'views','404.html'))
 })
+app.use(errorHandler);
 
 app.listen(port,()=>{
   console.log(`listening on port ${port}`);

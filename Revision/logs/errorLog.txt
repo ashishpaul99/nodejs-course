@@ -1,0 +1,6 @@
+uuid:b3c2b179-e453-43ae-8a61-35f5e75ccb97	DateTime:2025-08-28	22:21:48	message:ReferenceError:filePath is not defined
+uuid:3a2d932c-9238-4dfb-88e7-001fce14b532	DateTime:2025-08-28	22:21:57	message:ReferenceError:filePath is not defined
+uuid:e7386a39-7741-4ae2-826e-ce4f4171ed3f	DateTime:2025-08-28	22:23:13	message:Error:ENOENT: no such file or directory, stat 'C:\Users\Ashishpaul\Desktop\Node Js\Revision\routes\views\index.html'
+uuid:4effc7ec-8463-43f9-a1d5-be74f59fdbab	DateTime:2025-08-28	22:42:53	message:TypeError:Cannot read properties of undefined (reading 'firstname')
+uuid:a980e54f-049d-4a59-bb03-fc4b3fd5d91d	DateTime:2025-08-28	22:43:15	message:TypeError:Cannot read properties of undefined (reading 'firstname')
+uuid:16df3b52-62a7-4594-8c1f-047c61eec720	DateTime:2025-08-28	22:46:44	message:SyntaxError:Expected double-quoted property name in JSON at position 27 (line 4 column 1)
