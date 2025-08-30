@@ -1,0 +1,16 @@
+[
+  {
+    "username": "user1",
+    "password": "$2b$10$t0wQbdFLHNN0UR3RYC8k.OK0pajHgDvE1oWRD5JqO82yC1pkc4DO6"
+  },
+  {
+    "username": "user2",
+    "password": "$2b$10$fCcVowFk4X33onTzPORScO6KzfElKR3f/t3YkiJKo4LGff.afhYQ."
+  },
+  {
+    "username": "user3",
+    "password": "$2b$10$FzdXtXGg78knfKXEhhArlOsTddoUw6Hc9xgLZ6MJwMhpJ.SaldxoC"
+  }
+]
+
+

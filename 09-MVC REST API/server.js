@@ -1,39 +1,47 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const {logger}=require("./middleware/logEvents");
-const cors=require('cors');
+const { logger } = require("./middleware/logEvents");
+const cors = require('cors');
 const port = process.env.PORT || 3500;
-const corsOptions=require('./config/corsOption')
+const corsOptions = require('./config/corsOption');
 
-// import error handler 
-const errorHandler=require('./middleware/errorHandler');
+// Import error handler middleware
+const errorHandler = require('./middleware/errorHandler');
 
-// import cors 
+// ------------------- Middleware ------------------- //
 
-// custom middleware - logger
+// Custom middleware for logging requests
 app.use(logger);
 
-// cross origing resource sharing
-app.use(cors(corsOptions))
+// Enable CORS with custom options
+app.use(cors(corsOptions));
+
+// Middleware to parse URL-encoded data (form submissions)
 app.use(express.urlencoded({ extended: false }));
+
+// Middleware to parse incoming JSON data
 app.use(express.json());
 
-// Serving static files for root path (e.g., /style.css, /script.js)
+// Serve static files from the "public" folder (CSS, JS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Applying the router for root
+// ------------------- Routes ------------------- //
+
+// Root route
 app.use('/', require('./routes/root'));
 
-// Employees router
-app.use('/employees',require('./routes/api/employees'))
+// Register route
+app.use('/register', require('./routes/register'));
 
-// app.use((req, res) => {
-//     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-// });
+// auth route
+app.use('/auth',require('./routes/auth'));
 
-// 404 handler
-// use regx
+// Employees API route
+app.use('/employees', require('./routes/api/employees'));
+
+// ------------------- 404 Handler ------------------- //
+// Catch-all route handler for requests that don't match anything above
 app.all(/.*/, (req, res) => {
   res.status(404);
 
@@ -46,7 +54,9 @@ app.all(/.*/, (req, res) => {
   }
 });
 
+// ------------------- Error Handler ------------------- //
 app.use(errorHandler);
-app.listen(port, () => console.log(`Server is running on port ${port}`));
 
+// ------------------- Start Server ------------------- //
+app.listen(port, () => console.log(`Server is running on port ${port}`));
 
