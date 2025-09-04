@@ -20,6 +20,7 @@ const fsPromises = require('fs').promises;
 
 // Import path module to handle and transform file paths
 const path = require('path');
+const { object } = require('zod');
 
 
 // Handle user login request
@@ -41,20 +42,27 @@ const handleLogin = async (req, res) => {
     const match = await bcrypt.compare(pwd, foundUser.password);
 
     if (match) {
+        const roles = Object.values(foundUser.roles);
 
-    // Create Access Token (short-lived token)   
-    const accessToken = jwt.sign(
-        { "username": foundUser.username },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '30s' }
-    );
+        // create JWTs
+        const accessToken = jwt.sign(
+            {
+                "UserInfo": {    
+                    "username": foundUser.username,
+                    "roles": roles
+                }
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '30s' }
+        );
 
-    // Create Refresh Token (long-lived token)
-    const refreshToken = jwt.sign(
-        { "username": foundUser.username },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '1d' }
-    );
+
+        // Create Refresh Token (long-lived token)
+        const refreshToken = jwt.sign(
+            { "username": foundUser.username },
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: '1d' }
+        );
 
     // Save refresh token in DB (so we can invalidate it on logout)
 
@@ -93,3 +101,4 @@ res.cookie('jwt', refreshToken, {
 };
 
 module.exports = { handleLogin };
+

@@ -39,16 +39,24 @@ const handleRefreshToken = async (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,  // ✅ FIX: use correct secret
         (err, decoded) => {
             // If invalid token OR username mismatch → 403 Forbidden
-            if (err || foundUser.username !== decoded.username) {
+        if (err || foundUser.username !== decoded.username) {
                 return res.sendStatus(403);
-            }
+        }
 
-            // 4. Create a new access token (short-lived)
-            const accessToken = jwt.sign(
-                { "username": decoded.username },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '30s' }
-            );
+        const roles = Object.values(foundUser.roles);
+
+        // 4. Create a new access token (short-lived)
+        const accessToken = jwt.sign(
+            {
+                "UserInfo": {
+                "username": decoded.username,
+                "roles": roles
+                }
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '30s' }
+        );
+
 
             // Send new access token to client
             res.json({ accessToken });
