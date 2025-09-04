@@ -74,13 +74,15 @@ const handleLogin = async (req, res) => {
         JSON.stringify(userDB.users)
     );
 
-    
     // Send refresh token as HttpOnly cookie (secure, not accessible by JS)
-    res.cookie('jwt', refreshToken, {
-            httpOnly: true,                 // prevents client-side JS access
-            maxAge: 24 * 60 * 60 * 1000     // cookie expires in 1 day
-    });
+res.cookie('jwt', refreshToken, {
+    httpOnly: true,              // Cookie can't be accessed by client-side JS
+    sameSite: 'None',            // Required for cross-site cookie sharing
+    secure: true,                // Cookie only sent over HTTPS
+    maxAge: 24 * 60 * 60 * 1000  // Cookie expires in 1 day
+});
 
+   
     // Send access token in response body (used for API requests)
     res.json({ accessToken });
 

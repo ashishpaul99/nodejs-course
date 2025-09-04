@@ -26,7 +26,7 @@ const handleLogout = async (req, res) => {
 
     // If no user found → clear the cookie and return 204
     if (!foundUser) {
-        res.clearCookie('jwt', { httpOnly: true });
+        res.clearCookie('jwt', { httpOnly: true,sameSite:'None',secure:true });
         return res.sendStatus(204);
     }
 
@@ -48,7 +48,7 @@ const handleLogout = async (req, res) => {
     );
 
     // 4. Clear the cookie in client
-    res.clearCookie('jwt', { httpOnly: true, secure: true }); 
+    res.clearCookie('jwt', { httpOnly: true,sameSite:'None', secure: true }); 
     // secure:true → cookie only sent over HTTPS in production
 
     // 5. Send "No Content" success response

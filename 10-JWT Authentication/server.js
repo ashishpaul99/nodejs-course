@@ -7,6 +7,9 @@ const port = process.env.PORT || 3500;
 const corsOptions = require('./config/corsOption');
 const cookieParser=require('cookie-parser');
 
+// Import credentials middleware
+const credentials = require('./middleware/credentials');
+
 // Import error handler middleware
 const errorHandler = require('./middleware/errorHandler');
 
@@ -16,6 +19,9 @@ const verifyJWT=require('./middleware/verifyJWT');
 
 // Custom middleware for logging requests
 app.use(logger);
+
+// Use credentials middleware (handles Access-Control-Allow-Credentials)
+app.use(credentials);
 
 // Enable CORS with custom options
 app.use(cors(corsOptions));
