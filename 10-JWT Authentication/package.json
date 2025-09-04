@@ -1,5 +1,5 @@
 {
-  "name": "05-build-a-web-server",
+  "name": "08-routing",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -15,8 +15,12 @@
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^11.1.0"
   }
 }
