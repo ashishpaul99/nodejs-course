@@ -43,6 +43,8 @@ const handleLogin = async (req, res) => {
 
     if (match) {
         const roles = Object.values(foundUser.roles);
+        console.log("Roles going into JWT:", roles);
+
 
         // create JWTs
         const accessToken = jwt.sign(

@@ -3,10 +3,12 @@ require('dotenv').config();
 
 // Middleware to verify JWT in incoming requests
 const verifyJWT = (req, res, next) => {
-    const authHeader = req.headers['authorization']; // Get 'Authorization' header
+    const authHeader = req.headers.authorization 
+    || req.headers.Authorization // Get 'Authorization' header
 
     // If no auth header → Unauthorized (401)
-    if (!authHeader) return res.sendStatus(401);
+    // checking for Brearer in authHeader
+    if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401);
 
     console.log(authHeader); // Example: "Bearer <token>"
 
@@ -20,9 +22,13 @@ const verifyJWT = (req, res, next) => {
         (err, decoded) => {
             // If token is invalid/expired → Forbidden (403)
             if (err) return res.sendStatus(403);
+            // 🔍 Debug logs
+            console.log("Decoded JWT:", decoded);
+            console.log("Decoded roles:", decoded.UserInfo.roles);
 
             // Save decoded username in request object for later use
-            req.user = decoded.username;
+            req.user = decoded.UserInfo.username;
+            req.roles=decoded.UserInfo.roles;
 
             // Continue to next middleware/route
             next();
@@ -31,3 +37,6 @@ const verifyJWT = (req, res, next) => {
 };
 
 module.exports = verifyJWT;
+
+
+
