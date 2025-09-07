@@ -1,0 +1,21 @@
+Date: 2025-08-25 22:39:59	ID: 98665ce6-369e-476f-9c2c-d0582dbbbee0	Message: Error:Not allowed by CORS
+
+
+
+Date: 2025-08-28 18:15:27	ID: 2b7e859e-5695-4deb-ae93-64e311d1aeaa	Message: SyntaxError:Expected double-quoted property name in JSON at position 38 (line 5 column 1)
+Date: 2025-08-28 18:15:49	ID: fb0c8de9-1ab7-4bca-8800-d7db1711892b	Message: SyntaxError:Expected double-quoted property name in JSON at position 35 (line 4 column 1)
+Date: 2025-08-28 18:16:35	ID: a3715df1-ffdf-45ab-b44d-6863ceffa531	Message: SyntaxError:Bad control character in string literal in JSON at position 32 (line 3 column 21)
+Date: 2025-08-28 18:18:16	ID: 3983fdb4-6715-4d17-81d5-020ef1dcdbb2	Message: SyntaxError:Expected double-quoted property name in JSON at position 15 (line 3 column 1)
+Date: 2025-08-29 14:44:35	ID: 91a1847b-4a95-49be-8f1d-f1763e4870f3	Message: SyntaxError:Expected double-quoted property name in JSON at position 12 (line 3 column 1)
+Date: 2025-08-30 15:37:13	ID: f04ecc81-65ea-4df7-a5c4-3b3e8135a90f	Message: SyntaxError:Unexpected token 'a', ..."Username":ashishpaul"... is not valid JSON
+Date: 2025-09-02 23:14:49	ID: 9f3fd35b-4001-4f2a-b4f9-2a2118f332b0	Message: SyntaxError:Expected ',' or '}' after property value in JSON at position 21 (line 3 column 3)
+Date: 2025-09-07 00:53:25	ID: 68ac37a0-0be1-4821-9395-0bf905d83e8d	Message: SyntaxError:Unexpected end of JSON input
+Date: 2025-09-07 00:53:34	ID: 5abea728-b977-49c3-9401-fc390d4cdd39	Message: SyntaxError:Unexpected end of JSON input
+Date: 2025-09-07 01:25:00	ID: 6ca4dd0a-a8e7-4268-90cf-f996a2b19f90	Message: ReferenceError:setEmployees is not defined
+Date: 2025-09-07 22:32:07	ID: 76c93d82-d56c-4a53-9c74-9a24c28cb66d	Message: SyntaxError:Expected double-quoted property name in JSON at position 42 (line 3 column 1)
+Date: 2025-09-07 22:32:14	ID: a25da3d9-ae2d-4e24-bd99-616f1462c8a2	Message: Error:Cannot set headers after they are sent to the client
+Date: 2025-09-07 22:33:10	ID: f8f1ba4b-ff51-4637-90e5-558bc1377738	Message: ReferenceError:User is not defined
+Date: 2025-09-07 22:48:14	ID: b55e2f29-1a9d-4b36-8ede-472633c45171	Message: ReferenceError:User is not defined
+Date: 2025-09-07 22:49:11	ID: 1549eed5-fea9-4999-b05b-c5abea6d8e3d	Message: ReferenceError:User is not defined
+Date: 2025-09-07 22:55:11	ID: a5bef0f8-73e4-483f-8528-3c90fa419d94	Message: ReferenceError:User is not defined
+Date: 2025-09-07 22:55:18	ID: de4bdcf9-a711-4bc3-b657-321c92963fc7	Message: ReferenceError:User is not defined
